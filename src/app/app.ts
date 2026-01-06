@@ -5,7 +5,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'tl-root',
   imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.css',
+  styleUrls: ['./app.scss'],
 })
 export class App {
   protected readonly title = signal('angular-todolist');
