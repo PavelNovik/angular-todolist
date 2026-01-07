@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'tl-users',
   imports: [],
   templateUrl: './users.html',
-  styleUrl: './users.scss',
+  styleUrls: ['./users.scss'],
 })
-export class Users {
-
-}
+export class Users {}

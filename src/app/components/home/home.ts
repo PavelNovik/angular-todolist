@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'tl-home',
   imports: [],
   templateUrl: './home.html',
-  styleUrl: './home.scss',
+  styleUrls: ['./home.scss'],
 })
-export class Home {
-
-}
+export class Home {}
