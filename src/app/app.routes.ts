@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { Home } from './components/home/home';
+import { PageNotFound } from './components/page-not-found/page-not-found';
 
 export const routes: Routes = [
   {
@@ -17,4 +18,10 @@ export const routes: Routes = [
     loadComponent: () => import('./components/todolist/todolist').then((m) => m.Todolist),
     title: 'Todolist',
   },
+  {
+    path: 'pageNotFound',
+    component: PageNotFound,
+    title: 'Page not found',
+  },
+  { path: '**', redirectTo: 'pageNotFound' },
 ];
