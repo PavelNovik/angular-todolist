@@ -1,1 +1,6 @@
 <p>users works!</p>
+@for (user of users$ | async; track user) {
+<div>
+  {{user.id}} -- {{user.name}}
+</div>
+}
