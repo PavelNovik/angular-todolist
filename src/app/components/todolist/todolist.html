@@ -1,1 +1,7 @@
 <p>todolist works!</p>
+<div class="todolists">
+  @for (todolist of todolist$ | async; track todolist.id) {
+    <div class="w-70 border-2 border-solid border-black rounded-sm] ">{{todolist.id}} -- {{todolist.title}}</div>
+  }
+</div>
+
