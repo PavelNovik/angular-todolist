@@ -8,7 +8,7 @@ import { UserResponse, UserT } from '../../../shared/types';
 @Injectable({
   providedIn: 'root',
 })
-export class User {
+export class UserService {
   httpAddress = `${environment.baseUrl}/1.0`;
   private http = inject(HttpClient);
   private beautyLogger = inject(BeautyLogger);

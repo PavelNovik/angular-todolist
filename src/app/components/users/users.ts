@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { User } from './service/user';
+import { Component, inject, OnInit } from '@angular/core';
+import { UserService } from './service/user.service';
 import { Observable } from 'rxjs';
 import { UserT } from '../../shared/types';
 import { AsyncPipe } from '@angular/common';
@@ -10,9 +10,9 @@ import { AsyncPipe } from '@angular/common';
   templateUrl: './users.html',
   styleUrls: ['./users.scss'],
 })
-export class Users {
+export class Users implements OnInit {
   users$!: Observable<UserT[]>;
-  private userService = inject(User);
+  private userService = inject(UserService);
 
   getUsers(page: number) {
     this.users$ = this.userService.getUsers(page);
