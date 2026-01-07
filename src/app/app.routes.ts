@@ -1,7 +1,5 @@
 import { Routes } from '@angular/router';
 import { Home } from './components/home/home';
-import { Users } from './components/users/users';
-import { Todolists } from './components/todolists/todolists';
 
 export const routes: Routes = [
   {
@@ -11,12 +9,12 @@ export const routes: Routes = [
   },
   {
     path: 'users',
-    component: Users,
+    loadComponent: () => import('./components/users/users').then((m) => m.Users),
     title: 'Users',
   },
   {
-    path: 'todolists',
-    component: Todolists,
-    title: 'Todolists',
+    path: 'todolist',
+    loadComponent: () => import('./components/todolist/todolist').then((m) => m.Todolist),
+    title: 'Todolist',
   },
 ];
