@@ -18,3 +18,33 @@ export interface UserResponse {
   totalCount: number;
   error: string | null;
 }
+
+export interface BaseResponse<T = object> {
+  resultCode: number;
+  messages: string[];
+  data: T;
+}
+
+export interface TodolistT {
+  addedDate: string;
+  id: string;
+  order: number;
+  title: string;
+}
+export interface Task {
+  addedDate: string;
+  deadline: string;
+  description: string;
+  id: string;
+  order: number;
+  priority: number;
+  startDate: string;
+  status: number;
+  title: string;
+  todoListId: string;
+}
+export interface Tasks {
+  error: string;
+  items: Task[];
+  totalCount: number;
+}
