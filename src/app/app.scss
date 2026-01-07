@@ -1,0 +1,28 @@
+.navigation {
+  display: flex;
+  gap: .1rem;
+
+  a {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: #2563eb; /* синий */
+    transition: background-color 0.2s ease, transform 0.1s ease;
+
+    &:hover {
+      background-color: #1e40af;
+    }
+
+    &.active {
+      background-color: #052385;
+      transform: translateY(1px);
+
+      //color: orangered;
+      //font-weight: bold;
+    }
+
+  }
+}
