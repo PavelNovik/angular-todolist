@@ -9,15 +9,15 @@
     text-decoration: none;
     font-weight: 500;
     color: #ffffff;
-    background-color: #2563eb; /* синий */
+    background-color: #de77e5; /* синий */
     transition: background-color 0.2s ease, transform 0.1s ease;
 
     &:hover {
-      background-color: #1e40af;
+      background-color: #d63cff;
     }
 
     &.active {
-      background-color: #052385;
+      background-color: #ea05f3;
       transform: translateY(1px);
 
       //color: orangered;
