@@ -1,6 +1,13 @@
 <p>users works!</p>
-@for (user of users$ | async; track user) {
-<div>
-  {{user.id}} -- {{user.name}}
+<div class="flex flex-col ">
+  @for (user of users$ | async; track user) {
+    <div>
+      {{user.id}} -- <h2>{{user.name}}</h2>
+      @if (user.photos.small) {
+      <img alt="user photo" height="100" width="100" [ngSrc]="user.photos.small">
+      }
+    </div>
+  }
 </div>
-}
+  <button class="border-2 border-solid border-black rounded-sm" [queryParams]="{page:1}" [routerLink]="['/users']">To start page</button>
+  <button class="border-2 border-solid border-black rounded-sm" (click)="nextUserHandler()">Next page of users</button>
