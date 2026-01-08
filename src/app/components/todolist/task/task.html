@@ -1,1 +1,11 @@
-<p>task works!</p>
+<div>
+  @for (task of tasks$ | async; track task.id) {
+  <div>
+    @if (task.status === 0) {
+    <input type="checkbox" />{{task.title}}
+    } @else {
+    <input checked type="checkbox"/>{{task.title}}
+    }
+  </div>
+  }
+</div>
