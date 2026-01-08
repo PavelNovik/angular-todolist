@@ -9,5 +9,7 @@
     </div>
   }
 </div>
-  <button class="border-2 border-solid border-black rounded-sm" [queryParams]="{page:1}" [routerLink]="['/users']">To start page</button>
-  <button class="border-2 border-solid border-black rounded-sm" (click)="nextUserHandler()">Next page of users</button>
+<div class="flex gap-1 flex-row">
+  <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition cursor-pointer" [queryParams]="{page:1}" [routerLink]="['/users']">To start page</button>
+  <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition cursor-pointer" (click)="nextUserHandler()">Next page of users</button>
+</div>
