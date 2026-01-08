@@ -1,37 +1,37 @@
 export type Severity = 'error' | 'warning' | 'info' | 'success';
 
-interface Photos {
+type Photos = {
   small: string | null;
   large: string | null;
-}
+};
 
-export interface UserT {
+export type UserT = {
   name: string;
   id: number;
   photos: Photos;
   status: string | null;
   followed: boolean;
-}
+};
 
-export interface UserResponse {
+export type UserResponse = {
   items: UserT[];
   totalCount: number;
   error: string | null;
-}
+};
 
-export interface BaseResponse<T = object> {
+export type BaseResponse<T = object> = {
   resultCode: number;
   messages: string[];
   data: T;
-}
+};
 
-export interface TodolistT {
+export type TodolistT = {
   addedDate: string;
   id: string;
   order: number;
   title: string;
-}
-export interface Task {
+};
+export type TaskT = {
   addedDate: string;
   deadline: string;
   description: string;
@@ -42,9 +42,9 @@ export interface Task {
   status: number;
   title: string;
   todoListId: string;
-}
-export interface Tasks {
+};
+export type Tasks = {
   error: string;
-  items: Task[];
+  items: TaskT[];
   totalCount: number;
-}
+};
