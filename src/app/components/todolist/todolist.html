@@ -1,7 +1,8 @@
 <p>todolist works!</p>
-<div class="grid grid-cols-3 divide-x-3  todolists">
-  @for (todolist of todolist$ | async; track todolist.id) {
-    <div class="w-70 border-2 border-solid border-black rounded-sm] ">{{todolist.id}} -- {{todolist.title}}</div>
-  }
-</div>
+  <div class="grid grid-cols-2 gap-5 divide-x-3  todolists">
+    @for (todolist of todolist$ | async; track todolist.id) {
+      <div class="w-100 border-2 border-solid border-black rounded-sm] ">{{todolist.id}} -- {{todolist.title}}</div>
+    }
+  </div>
+
 
