@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, input, OnInit } from '@angular/core';
 import { TaskService } from '../service/task.service';
 import { Observable } from 'rxjs';
 import { TaskT } from '../../../shared/types';
@@ -13,9 +13,9 @@ import { AsyncPipe } from '@angular/common';
 export class Task implements OnInit {
   tasks$!: Observable<TaskT[]>;
   private taskService = inject(TaskService);
-  @Input() todolistId?: string;
+  readonly todolistId = input<string>();
   ngOnInit() {
-    this.taskService.getTasks(this.todolistId);
+    this.taskService.getTasks(this.todolistId());
     this.tasks$ = this.taskService.tasks$;
     console.log(this.tasks$);
   }
