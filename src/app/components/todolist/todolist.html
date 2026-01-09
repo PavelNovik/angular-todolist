@@ -1,9 +1,10 @@
 <p>todolist works!</p>
-  <div class="grid grid-cols-2 gap-5 divide-x-3  todolists">
+  <div class="grid grid-cols-2 gap-5 todolists">
     @for (todolist of todolist$ | async; track todolist.id) {
-      <div class="w-100 border-2 border-solid border-black rounded-sm] ">{{todolist.id}} -- {{todolist.title}}
-      <tl-task todolistId="{{todolist.id}}" />
-      </div>
+      <tl-todo [todolist]="todolist"/>
+<!--      <div class="w-100 border-2 border-solid border-black rounded-sm] ">{{todolist.id}} &#45;&#45; {{todolist.title}}-->
+<!--      <tl-task todolistId="{{todolist.id}}" />-->
+<!--      </div>-->
     }
   </div>
 
