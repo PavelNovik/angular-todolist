@@ -1,0 +1,21 @@
+.todos-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  h2 {
+    font-size: 2rem;
+  }
+}
+.todos-input {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+.input {
+  width: 300px;
+  border: 2px solid black;
+  padding: 10px;
+}
