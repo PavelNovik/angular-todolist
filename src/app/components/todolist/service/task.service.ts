@@ -19,9 +19,7 @@ export class TaskService {
     this.http
       .get<Tasks>(`${this.httpAddress}/${todolistId}/tasks`)
       .pipe(catchError(this.errorHandler.bind(this)))
-      .subscribe((res) => {
-        this.tasks$.next(res.items);
-      });
+      .subscribe((res) => this.tasks$.next(res.items));
   }
   private errorHandler(error: HttpErrorResponse): Observable<never> {
     this.beautyLogger.log(error.message, 'error');
