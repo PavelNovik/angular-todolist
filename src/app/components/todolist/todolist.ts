@@ -16,10 +16,17 @@ export class Todolist implements OnInit {
   todolist$!: Observable<TodolistT[]>;
   private todolistService = inject(TodolistService);
   protected todoTitle = '';
-  protected addTodolisthandler() {}
+  protected addTodolisthandler() {
+    this.todolistService.addTodolist(this.todoTitle);
+    this.todoTitle = '';
+  }
 
   ngOnInit() {
     this.todolist$ = this.todolistService.todolists$;
     this.todolistService.getTodolists();
+  }
+
+  protected removeTodo(todoId: string) {
+    this.todolistService.removeTodo(todoId);
   }
 }
