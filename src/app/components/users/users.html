@@ -1,15 +1,15 @@
-<p>users works!</p>
+<h2>Angular users</h2>
 <div class="flex flex-col ">
   @for (user of users$ | async; track user) {
-    <div>
-      {{user.id}} -- <h2>{{user.name}}</h2>
+    <div class="user">
+      <span>{{user.id}}</span> -- <span class="user-name">{{user.name}}</span>
       @if (user.photos.small) {
       <img alt="user photo" height="100" width="100" [ngSrc]="user.photos.small">
       }
     </div>
   }
 </div>
-<div class="flex gap-1 flex-row">
+<div class="buttons flex gap-1 flex-row">
   <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition cursor-pointer" [queryParams]="{page:1}" [routerLink]="['/users']">To start page</button>
   <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition cursor-pointer" (click)="nextUserHandler()">Next page of users</button>
 </div>
