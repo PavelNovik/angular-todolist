@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, EMPTY, Observable } from 'rxjs';
-import { TodolistT } from '../../../shared/types';
+import { BehaviorSubject, catchError, EMPTY, map, Observable } from 'rxjs';
+import { BaseResponse, TodolistT } from '../../../shared/types';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BeautyLogger } from '../../../shared/beauty-logger';
@@ -21,6 +21,36 @@ export class TodolistService {
       .pipe(catchError(this.errorHandler.bind(this)))
       .subscribe((todos) => {
         this.todolists$.next(todos);
+      });
+  }
+  addTodolist(title: string) {
+    this.http
+      .post<BaseResponse<{ item: TodolistT }>>(`${this.httpAddress}`, { title })
+      .pipe(catchError(this.errorHandler.bind(this)))
+      .pipe(
+        map((res) => {
+          const stateTodo = this.todolists$.getValue();
+          const newTodo = res.data.item;
+          return [newTodo, ...stateTodo];
+        }),
+      )
+      .subscribe((res) => {
+        this.todolists$.next(res);
+      });
+  }
+
+  removeTodo(todoId: string) {
+    this.http
+      .delete<BaseResponse>(`${this.httpAddress}/${todoId}`)
+      .pipe(
+        map(() => {
+          const stateTodo = this.todolists$.getValue();
+          return stateTodo.filter((tl) => tl.id !== todoId);
+        }),
+      )
+      .pipe(catchError(this.errorHandler.bind(this)))
+      .subscribe((res) => {
+        this.todolists$.next(res);
       });
   }
   private errorHandler(error: HttpErrorResponse): Observable<never> {
