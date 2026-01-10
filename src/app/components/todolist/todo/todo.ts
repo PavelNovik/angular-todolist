@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { TodolistT } from '../../../shared/types';
 
 @Component({
@@ -9,4 +9,13 @@ import { TodolistT } from '../../../shared/types';
 })
 export class Todo {
   readonly todolist = input<TodolistT>();
+  readonly removeTodo = output<string>();
+  // @Output() readonly removeTodoEvent = new EventEmitter<string>();
+
+  protected removeTodolist() {
+    const id = this.todolist()?.id;
+    if (id) {
+      this.removeTodo.emit(id);
+    }
+  }
 }
