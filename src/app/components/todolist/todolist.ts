@@ -29,4 +29,8 @@ export class Todolist implements OnInit {
   protected removeTodo(todoId: string) {
     this.todolistService.removeTodo(todoId);
   }
+
+  protected editTodoTitle(data: { id: string; newTitle: string }): void {
+    this.todolistService.updateTodoTitle(data);
+  }
 }
