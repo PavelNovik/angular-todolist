@@ -53,6 +53,22 @@ export class TodolistService {
         this.todolists$.next(res);
       });
   }
+  updateTodoTitle(data: { id: string; newTitle: string }): void {
+    this.http
+      .put<BaseResponse>(`${this.httpAddress}/${data.id}`, { title: data.newTitle })
+      .pipe(
+        map(() => {
+          const stateTodo = this.todolists$.getValue();
+          return stateTodo.map((tl) => {
+            return tl.id === data.id ? { ...tl, title: data.newTitle } : tl;
+          });
+        }),
+      )
+      .pipe(catchError(this.errorHandler.bind(this)))
+      .subscribe((todos) => {
+        this.todolists$.next(todos);
+      });
+  }
   private errorHandler(error: HttpErrorResponse): Observable<never> {
     this.beautyLogger.log(error.message, 'error');
     return EMPTY;
