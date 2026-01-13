@@ -1,0 +1,11 @@
+.box {
+  input {
+    &:checked {
+      opacity: .5;
+      span {
+        text-decoration: line-through;
+      }
+    }
+
+  }
+}
