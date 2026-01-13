@@ -43,7 +43,7 @@ export type TaskT = {
   title: string;
   todoListId: string;
 };
-export type Tasks = {
+export type TasksResponse = {
   error: string;
   items: TaskT[];
   totalCount: number;
