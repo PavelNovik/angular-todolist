@@ -1,0 +1,12 @@
+<div>
+  @for (task of tasks$ | async; track task.id) {
+      <tl-task [task]="task" />
+<!--  <div>-->
+<!--    @if (task.status === 0) {-->
+<!--    <input type="checkbox" />{{task.title}}-->
+<!--    } @else {-->
+<!--    <input checked type="checkbox"/>{{task.title}}-->
+<!--    }-->
+<!--  </div>-->
+  }
+</div>
