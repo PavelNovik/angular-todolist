@@ -1,15 +1,16 @@
 import { Component, input, output } from '@angular/core';
 import { TodolistT } from '../../../shared/types';
 import { FormsModule } from '@angular/forms';
+import { Tasks } from './tasks/tasks';
 
 @Component({
   selector: 'tl-todo',
-  imports: [FormsModule],
+  imports: [FormsModule, Tasks],
   templateUrl: './todo.html',
   styleUrl: './todo.scss',
 })
 export class Todo {
-  readonly todolist = input<TodolistT>();
+  readonly todolist = input.required<TodolistT>();
   readonly removeTodo = output<string>();
   readonly editTodo = output<{ id: string; newTitle: string }>();
   // @Output() readonly removeTodoEvent = new EventEmitter<string>();

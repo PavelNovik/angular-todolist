@@ -6,5 +6,8 @@
       {{todolist()?.title}}
     </h3>
   }
+    @if (todolist().id) {
+    <tl-tasks [todolistId]="todolist()!.id"/>
+    }
   <button type="button" (click)="removeTodolist()">Delete</button>
 </div>
