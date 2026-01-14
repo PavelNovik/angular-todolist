@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { TaskT } from '../../../../../shared/types';
 
 @Component({
@@ -9,4 +9,9 @@ import { TaskT } from '../../../../../shared/types';
 })
 export class Task {
   readonly task = input<TaskT>();
+  readonly removeTaskEvent = output<{ todolistId: string; taskId: string }>();
+
+  protected removeTaskHandler() {
+    this.removeTaskEvent.emit({ todolistId: this.task()!.todoListId, taskId: this.task()!.id });
+  }
 }
