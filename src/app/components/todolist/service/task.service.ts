@@ -19,12 +19,16 @@ export class TaskService {
     this.http
       .get<TasksResponse>(`${this.httpAddress}/${todolistId}/tasks`)
       .pipe(catchError(this.errorHandler.bind(this)))
-      .pipe(map((res) => res.items))
+      .pipe(
+        map((res) => {
+          const stateTasks = this.tasks$.getValue();
+          stateTasks[todolistId] = res.items;
+          return stateTasks;
+        }),
+      )
       // .subscribe((res) => this.tasks$.next(res));
       .subscribe((res) => {
-        const stateTasks = this.tasks$.getValue();
-        stateTasks[todolistId] = res;
-        this.tasks$.next(stateTasks);
+        this.tasks$.next(res);
       });
   }
   addTask(data: { todoId: string; title: string }) {
@@ -32,11 +36,29 @@ export class TaskService {
       .post<BaseResponse<{ item: TaskT }>>(`${this.httpAddress}/${data.todoId}/tasks`, {
         title: data.title,
       })
-      .pipe(map((res) => res.data.item))
+      .pipe(
+        map((res) => {
+          const stateTasks = this.tasks$.getValue();
+          stateTasks[data.todoId] = [res.data.item, ...stateTasks[data.todoId]];
+          return stateTasks;
+        }),
+      )
       .subscribe((res) => {
-        const stateTasks = this.tasks$.getValue();
-        stateTasks[data.todoId] = [res, ...stateTasks[data.todoId]];
-        this.tasks$.next(stateTasks);
+        this.tasks$.next(res);
+      });
+  }
+  removeTask(todoId: string, taskId: string) {
+    this.http
+      .delete<BaseResponse>(`${this.httpAddress}/${todoId}/tasks/${taskId}`)
+      .pipe(
+        map(() => {
+          const stateTasks = this.tasks$.getValue();
+          stateTasks[todoId] = stateTasks[todoId].filter((task) => task.id !== taskId);
+          return stateTasks;
+        }),
+      )
+      .subscribe((res) => {
+        this.tasks$.next(res);
       });
   }
   private errorHandler(error: HttpErrorResponse): Observable<never> {
