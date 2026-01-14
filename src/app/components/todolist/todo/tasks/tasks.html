@@ -1,6 +1,6 @@
 <div>
     <input placeholder="Add new task" type="text" [(ngModel)]="taskTitle" (keyup.enter)="addTaskHandler()">
   @for (task of tasks$ | async; track task.id) {
-      <tl-task [task]="task" />
+      <tl-task [task]="task" (removeTaskEvent)="removeTask($event)"/>
   }
 </div>
