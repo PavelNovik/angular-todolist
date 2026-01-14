@@ -3,7 +3,7 @@
     <input type="text" [(ngModel)]="newTitle" (blur)="editTitleHandler()"/>
   } @else {
     <h3 (dblclick)="activateEditModeHandler()" >
-      {{todolist()?.title}}
+      {{todolist()!.title}}
     </h3>
   }
     @if (todolist().id) {
