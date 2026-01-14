@@ -42,9 +42,14 @@ export type TaskT = {
   status: number;
   title: string;
   todoListId: string;
+  completed: boolean;
 };
 export type TasksResponse = {
   error: string;
   items: TaskT[];
   totalCount: number;
+};
+
+export type DomainTask = {
+  [key: string]: TaskT[];
 };
