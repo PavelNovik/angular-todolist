@@ -31,18 +31,20 @@ export type TodolistT = {
   order: number;
   title: string;
 };
-export type TaskT = {
+export type TaskT = UpdateTaskModel & {
   addedDate: string;
-  deadline: string;
-  description: string;
   id: string;
   order: number;
+  todoListId: string;
+};
+export type UpdateTaskModel = {
+  title: string;
+  description: string;
+  completed: boolean;
   priority: number;
   startDate: string;
   status: number;
-  title: string;
-  todoListId: string;
-  completed: boolean;
+  deadline: string;
 };
 export type TasksResponse = {
   error: string;
