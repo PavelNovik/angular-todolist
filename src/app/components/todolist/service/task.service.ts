@@ -3,7 +3,13 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BeautyLogger } from '../../../shared/beauty-logger';
 import { BehaviorSubject, catchError, EMPTY, map, Observable } from 'rxjs';
-import { BaseResponse, DomainTask, TasksResponse, TaskT } from '../../../shared/types';
+import {
+  BaseResponse,
+  DomainTask,
+  TasksResponse,
+  TaskT,
+  UpdateTaskModel,
+} from '../../../shared/types';
 
 @Injectable({
   providedIn: 'root',
@@ -60,6 +66,23 @@ export class TaskService {
       .subscribe((res) => {
         this.tasks$.next(res);
       });
+  }
+  updateTask(data: { todolistId: string; taskId: string; model: UpdateTaskModel }) {
+    this.http
+      .put<BaseResponse<{ item: TaskT }>>(
+        `${this.httpAddress}/${data.todolistId}/tasks/${data.taskId}`,
+        data.model,
+      )
+      .pipe(
+        map(() => {
+          const stateTasks = this.tasks$.getValue();
+          stateTasks[data.todolistId] = stateTasks[data.todolistId].map((t) =>
+            t.id === data.taskId ? { ...t, ...data.model } : t,
+          );
+          return stateTasks;
+        }),
+      )
+      .subscribe((res) => this.tasks$.next(res));
   }
   private errorHandler(error: HttpErrorResponse): Observable<never> {
     this.beautyLogger.log(error.message, 'error');
