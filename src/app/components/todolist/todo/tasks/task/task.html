@@ -1,10 +1,5 @@
 <div class="box">
-    @if (task()?.status === 0) {
-        <input type="checkbox" />
+        <input type="checkbox" [checked]="!(task()?.status === taskStatusEnum.active)" (click)="changeTaskHandler($event)"/>
         <span>{{task()?.title}}</span>
-    } @else {
-        <input checked type="checkbox"/>
-        <span>{{task()?.title}}</span>
-    }
-    <button type="button" (click)="removeTaskHandler()">x</button>
+        <button type="button" (click)="removeTaskHandler()">x</button>
 </div>
