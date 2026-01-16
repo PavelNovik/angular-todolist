@@ -1,7 +1,7 @@
 import { Component, inject, input, OnInit } from '@angular/core';
 import { TaskService } from '../../service/task.service';
 import { map, Observable } from 'rxjs';
-import { TaskT } from '../../../../shared/types';
+import { TaskT, UpdateTaskModel } from '../../../../shared/types';
 import { AsyncPipe } from '@angular/common';
 import { Task } from './task/task';
 import { FormsModule } from '@angular/forms';
@@ -34,5 +34,9 @@ export class Tasks implements OnInit {
 
   protected removeTask(data: { todolistId: string; taskId: string }) {
     this.taskService.removeTask(data.todolistId, data.taskId);
+  }
+
+  protected changeTask(data: { todolistId: string; taskId: string; model: UpdateTaskModel }) {
+    this.taskService.updateTask(data);
   }
 }
