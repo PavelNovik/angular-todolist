@@ -3,14 +3,27 @@
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-
-  input {
-    &:checked {
-     & + span {
-        opacity: .5;
-        text-decoration: line-through;
-      }
-    }
-
+  .task-content {
+    display: flex;
+    margin-bottom: 5px;
   }
+
+  //input {
+  //  &:checked {
+  //   & + span {
+  //      opacity: .5;
+  //      text-decoration: line-through;
+  //    }
+  //  }
+  //
+  //}
+}
+.completed-task {
+  opacity: .5;
+  text-decoration: line-through;
+}
+.input {
+  width: 100%;
+  //box-sizing: border-box;
+  //border: 2px dashed #980303;
 }
