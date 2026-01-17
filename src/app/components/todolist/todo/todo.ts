@@ -19,7 +19,7 @@ export class Todo {
   newTitle = '';
 
   activateEditModeHandler() {
-    const title = this.todolist()?.title;
+    const title = this.todolist()!.title;
     if (title) {
       this.newTitle = title;
     }
@@ -34,7 +34,7 @@ export class Todo {
   }
 
   protected editTitleHandler() {
-    const id = this.todolist()?.id;
+    const id = this.todolist()!.id;
     if (id) {
       this.editTodo.emit({ id, newTitle: this.newTitle });
     }
