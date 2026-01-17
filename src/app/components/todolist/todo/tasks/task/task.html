@@ -1,9 +1,12 @@
 <div class="box">
+    <div class="task-content" [class]="{'completed-task': task()?.status === taskStatusEnum.completed}">
         <input type="checkbox" [checked]="!(task()?.status === taskStatusEnum.active)" (click)="changeTaskHandler($event)"/>
-    @if (editMode) {
-        <input type="text" [(ngModel)]="taskTitle" (blur)="editTitleHandler()">
-    } @else {
-        <span (dblclick)="activateEditModeHandler()" >{{task()?.title}}</span>
-    }
+        @if (editMode) {
+            <input class="input" type="text" [(ngModel)]="taskTitle" (blur)="editTitleHandler()">
+        } @else {
+            <span (dblclick)="activateEditModeHandler()" >{{task()?.title}}</span>
+        }
+    </div>
+
         <button type="button" (click)="removeTaskHandler()">x</button>
 </div>
