@@ -1,5 +1,9 @@
 <div class="box">
         <input type="checkbox" [checked]="!(task()?.status === taskStatusEnum.active)" (click)="changeTaskHandler($event)"/>
-        <span>{{task()?.title}}</span>
+    @if (editMode) {
+        <input type="text" [(ngModel)]="taskTitle" (blur)="editTitleHandler()">
+    } @else {
+        <span (dblclick)="activateEditModeHandler()" >{{task()?.title}}</span>
+    }
         <button type="button" (click)="removeTaskHandler()">x</button>
 </div>
