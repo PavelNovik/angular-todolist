@@ -17,6 +17,9 @@ export class Todolist implements OnInit {
   private todolistService = inject(TodolistService);
   protected todoTitle = '';
   protected addTodolisthandler() {
+    if (!this.todoTitle) {
+      return;
+    }
     this.todolistService.addTodolist(this.todoTitle);
     this.todoTitle = '';
   }
