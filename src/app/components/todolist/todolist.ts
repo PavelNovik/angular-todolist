@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TodolistT } from '../../shared/types';
+import { DomainTodo } from '../../shared/types';
 import { TodolistService } from './service/todolist.service';
 import { AsyncPipe } from '@angular/common';
 import { Todo } from './todo/todo';
@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./todolist.scss'],
 })
 export class Todolist implements OnInit {
-  todolist$!: Observable<TodolistT[]>;
+  todolist$!: Observable<DomainTodo[]>;
   private todolistService = inject(TodolistService);
   protected todoTitle = '';
   protected addTodolisthandler() {
