@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, EMPTY, map, Observable } from 'rxjs';
-import { BaseResponse, TodolistT } from '../../../shared/types';
+import { BaseResponse, DomainTodo, FilterType, TodolistT } from '../../../shared/types';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BeautyLogger } from '../../../shared/beauty-logger';
@@ -9,7 +9,7 @@ import { BeautyLogger } from '../../../shared/beauty-logger';
   providedIn: 'root',
 })
 export class TodolistService {
-  todolists$: BehaviorSubject<TodolistT[]> = new BehaviorSubject<TodolistT[]>([]);
+  todolists$: BehaviorSubject<DomainTodo[]> = new BehaviorSubject<DomainTodo[]>([]);
   httpAddress = `${environment.baseUrl}/1.1/todo-lists`;
 
   private http = inject(HttpClient);
@@ -18,6 +18,12 @@ export class TodolistService {
   getTodolists() {
     this.http
       .get<TodolistT[]>(`${this.httpAddress}`)
+      .pipe(
+        map((todolists) => {
+          const newTodos: DomainTodo[] = todolists.map((td) => ({ ...td, filter: 'all' }));
+          return newTodos;
+        }),
+      )
       .pipe(catchError(this.errorHandler.bind(this)))
       .subscribe((todos) => {
         this.todolists$.next(todos);
@@ -30,7 +36,7 @@ export class TodolistService {
       .pipe(
         map((res) => {
           const stateTodo = this.todolists$.getValue();
-          const newTodo = res.data.item;
+          const newTodo: DomainTodo = { ...res.data.item, filter: 'all' };
           return [newTodo, ...stateTodo];
         }),
       )
@@ -68,6 +74,14 @@ export class TodolistService {
       .subscribe((todos) => {
         this.todolists$.next(todos);
       });
+  }
+
+  changeFilter(data: { todoId: string; filter: FilterType }) {
+    const stateTodo = this.todolists$.getValue();
+    const newState = stateTodo.map((td) =>
+      td.id === data.todoId ? { ...td, filter: data.filter } : td,
+    );
+    this.todolists$.next(newState);
   }
   private errorHandler(error: HttpErrorResponse): Observable<never> {
     this.beautyLogger.log(error.message, 'error');
