@@ -1,0 +1,5 @@
+<div class="box">
+    <button [class]="{active : filter() ==='all'}" (click)="changeFilterHandler('all')">All</button>
+    <button [class]="{active : filter() ==='active'}" (click)="changeFilterHandler('active')">Active</button>
+    <button [class]="{active : filter() ==='completed'}" (click)="changeFilterHandler('completed')">Completed</button>
+</div>
