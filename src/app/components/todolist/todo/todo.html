@@ -7,7 +7,9 @@
     </h3>
   }
     @if (todolist().id) {
-    <tl-tasks [todolistId]="todolist()!.id"/>
+    <tl-tasks [todolistId]="todolist().id"/>
     }
+    <tl-todo-filters [filter]="todolist().filter" (changeFilterEvent)="changeFilter($event)"/>
+    <tl-todo-footer [addedDate]="todolist().addedDate"/>
   <button type="button" (click)="removeTodolist()">Delete</button>
 </div>
