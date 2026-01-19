@@ -31,6 +31,11 @@ export type TodolistT = {
   order: number;
   title: string;
 };
+export type FilterType = 'all' | 'active' | 'completed';
+
+export type DomainTodo = TodolistT & {
+  filter: FilterType;
+};
 export type TaskT = UpdateTaskModel & {
   addedDate: string;
   id: string;
