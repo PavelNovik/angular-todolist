@@ -1,0 +1,27 @@
+<div class="box">
+    <h2>Login page</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <label for="email">Email:
+        <input formControlName="email" id="email" required type="email"/>
+        <!--         [class]="{inputError: email!.invalid && (email!.dirty || email!.touched), inputSuccess: email!.valid }"-->
+        </label>
+        <!--  <p>{{ loginForm.value.email }}</p>-->
+        @if (email!.invalid && (email!.dirty || email!.touched)) {
+            <div class="alert">
+                @if (email.hasError('required')) {
+                    <div>Email is required.</div>
+                }
+                @if (email.hasError('pattern')) {
+                    <div>Email must be correct.</div>
+                }
+
+            </div>
+        }
+        <br>
+        <label for="password">Password:
+        <input formControlName="password" id="password" type="password"/>
+        </label>
+        <button type="submit" [disabled]="!loginForm.valid">Login</button>
+    </form>
+
+</div>
