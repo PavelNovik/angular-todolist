@@ -11,12 +11,19 @@ import { AuthService } from '../../services/auth.service';
 export class Login {
   private authService = inject(AuthService);
   loginForm = new FormGroup({
-    email: new FormControl('', [
-      Validators.pattern('[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,5}$'),
-      Validators.required,
-    ]),
-    password: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    rememberMe: new FormControl(false),
+    // loginForm = new UntypedFormGroup({
+    email: new FormControl('', {
+      nonNullable: true,
+      validators: [
+        Validators.pattern('[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z]{2,5}$'),
+        Validators.required,
+      ],
+    }),
+    password: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(3)],
+    }),
+    rememberMe: new FormControl<boolean>(false, { nonNullable: true }),
   });
   onSubmit(): void {
     // console.log(JSON.stringify(this.loginForm.value));
