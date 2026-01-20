@@ -1,9 +1,9 @@
 <div class="box">
     <h2>Login page</h2>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <label for="email">Email:
-        <input formControlName="email" id="email" required type="email"/>
-        <!--         [class]="{inputError: email!.invalid && (email!.dirty || email!.touched), inputSuccess: email!.valid }"-->
+        <input formControlName="email" id="email" required type="email"
+                 [class]="{inputError: email!.invalid && (email!.dirty || email!.touched), inputSuccess: email!.valid }"/>
         </label>
         <!--  <p>{{ loginForm.value.email }}</p>-->
         @if (email!.invalid && (email!.dirty || email!.touched)) {
@@ -19,8 +19,10 @@
         }
         <br>
         <label for="password">Password:
-        <input formControlName="password" id="password" type="password"/>
+        <input formControlName="password" id="password" type="password"
+               [class]="{inputError: password!.invalid && (password!.dirty || password!.touched), inputSuccess: password!.valid }"/>
         </label>
+        <label><input formControlName="rememberMe" type="checkbox" />remember me</label>
         <button type="submit" [disabled]="!loginForm.valid">Login</button>
     </form>
 
