@@ -60,3 +60,12 @@ export type TasksResponse = {
 export type DomainTask = {
   [key: string]: TaskT[];
 };
+export type MeResponse = {
+  data: {
+    id: number;
+    email: string;
+    login: string;
+  };
+  message: string[];
+  resultCode: number;
+};
