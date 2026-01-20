@@ -5,6 +5,12 @@ import { BaseResponse, MeResponse } from '../shared/types';
 import { ResultCodes } from '../enums/resultCode.enum';
 import { Router } from '@angular/router';
 
+export type LoginRequestData = {
+  email: string;
+  password: string;
+  rememberMe: boolean;
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -14,7 +20,7 @@ export class AuthService {
   private http = inject(HttpClient);
   private router = inject(Router);
 
-  login(data: any) {
+  login(data: Partial<LoginRequestData>) {
     this.http
       .post<BaseResponse<{ userId: number }>>(`${this.httpAddress}/login`, data)
       .subscribe((response) => {
