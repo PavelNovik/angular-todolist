@@ -16,9 +16,11 @@ export type LoginRequestData = {
 })
 export class AuthService {
   httpAddress = `${environment.baseUrl}/1.1/auth`;
-  isAuth = false;
   private http = inject(HttpClient);
   private router = inject(Router);
+  isAuth = false;
+
+  // isAuth$ = new BehaviorSubject<boolean>(false);
 
   login(data: Partial<LoginRequestData>) {
     this.http
@@ -26,6 +28,8 @@ export class AuthService {
       .subscribe((response) => {
         if (response.resultCode === ResultCodes.success) {
           this.router.navigate(['/']);
+          // this.isAuth$.next(true);
+          this.isAuth = true;
         }
       });
   }
@@ -33,13 +37,15 @@ export class AuthService {
     this.http.delete<BaseResponse>(`${this.httpAddress}/login`).subscribe((response) => {
       if (response.resultCode === ResultCodes.success) {
         this.router.navigate(['/login']);
+        // this.isAuth$.next(false);
+        this.isAuth = false;
       }
     });
   }
-
   me() {
     this.http.get<BaseResponse<MeResponse>>(`${this.httpAddress}/me`).subscribe((res) => {
       if (res.resultCode === ResultCodes.success) {
+        // this.isAuth$.next(true);
         this.isAuth = true;
       }
     });
