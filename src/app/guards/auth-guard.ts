@@ -26,6 +26,8 @@ export const authGuard: CanActivateFn = async (route, state) => {
   }
   return authService.isAuth;
 
+  // Work with Behavior subject object
+
   // return authService.isAuth$.pipe(
   //   tap((isAuth) => {
   //     if (!isAuth) {
