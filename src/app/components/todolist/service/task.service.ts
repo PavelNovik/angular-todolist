@@ -32,7 +32,6 @@ export class TaskService {
           return stateTasks;
         }),
       )
-      // .subscribe((res) => this.tasks$.next(res));
       .subscribe((res) => {
         this.tasks$.next(res);
       });
@@ -42,6 +41,7 @@ export class TaskService {
       .post<BaseResponse<{ item: TaskT }>>(`${this.httpAddress}/${data.todoId}/tasks`, {
         title: data.title,
       })
+      .pipe(catchError(this.errorHandler.bind(this)))
       .pipe(
         map((res) => {
           const stateTasks = this.tasks$.getValue();
@@ -56,6 +56,7 @@ export class TaskService {
   removeTask(todoId: string, taskId: string) {
     this.http
       .delete<BaseResponse>(`${this.httpAddress}/${todoId}/tasks/${taskId}`)
+      .pipe(catchError(this.errorHandler.bind(this)))
       .pipe(
         map(() => {
           const stateTasks = this.tasks$.getValue();
@@ -73,6 +74,7 @@ export class TaskService {
         `${this.httpAddress}/${data.todolistId}/tasks/${data.taskId}`,
         data.model,
       )
+      .pipe(catchError(this.errorHandler.bind(this)))
       .pipe(
         map(() => {
           const stateTasks = this.tasks$.getValue();
