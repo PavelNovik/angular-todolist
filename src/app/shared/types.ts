@@ -1,6 +1,11 @@
 export type Severity = 'error' | 'warning' | 'info' | 'success';
 
-type Photos = {
+export type NotificationT = {
+  message: string;
+  severity: Severity;
+};
+
+export type Photos = {
   small: string | null;
   large: string | null;
 };
