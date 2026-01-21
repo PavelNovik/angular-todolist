@@ -1,0 +1,8 @@
+@if (notification$ | async; as notify) {
+<div class="notification">
+    <div class="notification-item" [class]="{'notification-item--success': notify.severity === 'success', 'notification-item--error': notify.severity==='error'}">
+        {{ notify.message}}
+        <button (click)="closeNotification()">x</button>
+    </div>
+</div>
+}
