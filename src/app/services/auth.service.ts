@@ -38,7 +38,7 @@ export class AuthService {
   }
 
   me() {
-    this.http.get<MeResponse>(`${this.httpAddress}/me`).subscribe((res) => {
+    this.http.get<BaseResponse<MeResponse>>(`${this.httpAddress}/me`).subscribe((res) => {
       if (res.resultCode === ResultCodes.success) {
         this.isAuth = true;
       }
