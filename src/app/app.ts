@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'tl-root',
@@ -7,4 +8,9 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   templateUrl: './app.html',
   styleUrls: ['./app.scss'],
 })
-export class App {}
+export class App implements OnInit {
+  private authService = inject(AuthService);
+  ngOnInit() {
+    this.authService.me();
+  }
+}
